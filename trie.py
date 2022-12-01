@@ -26,8 +26,6 @@ class Trie:
 
     def insert_word(self,word,pos,document_id):
         '''Insert a word in a specified `document_id`'''
-        if word == 'i':
-            pass
         if len(word) > 0:
             self.insert_char_in_children(word[0],word,pos,document_id)
 
