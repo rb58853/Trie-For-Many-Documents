@@ -42,7 +42,7 @@ class RetrievalTrie(Trie):
             self.childs[char].insert_word(word[1:],pos,document_id) #rec
 
         except:
-            node = Trie(char,False,document_id)
+            node = RetrievalTrie(char,False,document_id,self)
             if len(word) == 1:
                 node.count_as_word_in_document[document_id] = 1
                 node.position_in_document_as_word[document_id] = [pos]   

@@ -51,6 +51,9 @@ def test_cases_retrieval_trie():
 
     text = remove_punctuation(open("texts//text3.txt","r").read().lower())
     trie.insert_text(text,'text3')
+    
+    text = open("texts//text4.txt","r").read()
+    trie.insert_text(text,'text4')
 
     while (True):
         print ("\nEntre un documento para saber su fercuencia maxima")
