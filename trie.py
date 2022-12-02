@@ -101,5 +101,3 @@ class Trie:
             return node.documents
         else:
             return []    
-        
-
