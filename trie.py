@@ -1,10 +1,4 @@
-import re, string
-from xml.dom.minidom import Document
-
-def remove_punctuation ( text ):
-  new_text = re.sub('\n', ' ', text)
-  return re.sub('[%s]' % re.escape(string.punctuation), ' ', new_text)
-
+from parser_text import remove_punctuation
 class Trie:
     def __init__(self, value = "^", root = False, document_id = 'default'):
         '''Create new Trie with `root = True`. Create simple node with `root = False`'''
@@ -20,7 +14,7 @@ class Trie:
     def insert_text(self,text,document_id = 'default'):
         '''Insert new docuement whit params `text` and a specified `document_id` if you want use many documents, without any document in another case,
         if you do not specify a 'document id', it is assumed to be a single document'''
-        words = remove_punctuation(text).lower().split(" ")
+        words = remove_punctuation(text).lower().split(" ") 
         for word,pos in zip(words,range(len(words))):
             self.insert_word(word,pos,document_id)
 
@@ -108,29 +102,4 @@ class Trie:
         else:
             return []    
         
-def test_cases():
-    trie = Trie(root = True)
-    text = open("texto.txt","r").read()
-    
-    import time
-    inicio = time.time()
-    #region create trie
-    trie.insert_text(text)
-    #endregion
-    print("\nTarda " +str(time.time()-inicio)+" para crear un trie de "+str(len(text))+" letras.") 
 
-    trie.insert_text(text,'test')
-
-    while (True):
-        print ("\nEntre la palabra que desea tener informacion")
-        word = input()
-        print ("\nEntre el id del documento del cual desea conocer informacion respecto a la palabra anterior")
-        doc = input()
-
-        print(word + " como prefijo aparece: " + str(trie.prefix_count_in_document(word,doc)))
-        print(word + " como palabra aparece: " + str(trie.word_count_in_document(word,doc)))
-        print(word + " aparece como prefijo en las posiciones: " + str(trie.prefix_position_in_document(word,doc)))
-        print(word + " aparece como palabra en las posiciones: " + str(trie.word_position_in_document(word,doc)))
-        print(word + " aparece en los documentos: "+str(str(trie.documents_of_word(word))))
-        print("\n")
-test_cases()
