@@ -1,4 +1,3 @@
-from parser_text import remove_punctuation
 class Trie:
     def __init__(self, value = "^", root = False, document_id = 'default'):
         '''Create new Trie with `root = True`. Create simple node with `root = False`'''
@@ -14,7 +13,7 @@ class Trie:
     def insert_text(self,text,document_id = 'default'):
         '''Insert new docuement whit params `text` and a specified `document_id` if you want use many documents, without any document in another case,
         if you do not specify a 'document id', it is assumed to be a single document'''
-        words = remove_punctuation(text).lower().split(" ") 
+        words = text.split(" ") 
         for word,pos in zip(words,range(len(words))):
             self.insert_word(word,pos,document_id)
 
